@@ -1,18 +1,34 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import Category from "./category";
+import Popular from "./popular";
+
 export default function Navbar() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState("category");
 
   const handleClick = (category) => {
     setSelected(category);
   };
+
   return (
     <>
+      <div className="flex justify-center items-center bg-blue-700 py-2">
+        <Image
+          className="mr-2 bg-blue-400"
+          src={"/car.png"}
+          width={40}
+          height={40}
+          alt="Car Icon"
+        />
+        <p className="text-white mx-2">FREE US Shipping for Orders $80+</p>
+      
+      </div>
+
       <div className="flex p-2 justify-between items-center border-gray-300 flex-wrap bg-slate-100">
         <div className="flex items-center">
           <Image src="/logo.png" width={80} height={80} alt="Logo" />
-          <h2 className="font-bold text-2xl text-blue-900">You N Me</h2>
+          <h2 className="font-bold text-2xl text-blue-900">You And Me</h2>
         </div>
         <div className="relative flex items-center hidden md:inline-flex">
           <input
@@ -35,15 +51,15 @@ export default function Navbar() {
             />
           </svg>
         </div>
-        <div className="flex items-center gap-5 ">
-          <Image src={"/user.png"} width={30} height={30} alt="cart" />
+        <div className="flex items-center gap-5">
+          <Image src={"/user.png"} width={30} height={30} alt="user" />
           <Image src={"/cart.png"} width={30} height={30} alt="cart" />
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
             Create Account
           </button>
         </div>
       </div>
-      <div className=" bg-slate-100 h-40">
+      <div className="bg-slate-100 h-40">
         <div className="flex justify-center gap-10">
           <h1
             className={`relative cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-blue-800 after:w-full after:scale-x-0 after:origin-left after:transition-transform after:duration-300 ${
@@ -66,78 +82,8 @@ export default function Navbar() {
             Popular Products
           </h1>
         </div>
-        <div className="flex justify-center mt-5 gap-10">
-          <button className="hover:bg-blue-700 text-blue-800 hover:text-white text-xs py-1 px-3 rounded-lg border border-blue-800">
-            Shop all <br />
-            Design
-          </button>
-          <div className="flex flex-col items-center">
-            <Image
-              src="/category/sports.png"
-              width={50}
-              height={30}
-              alt="Sports category"
-            />
-            <h1 className="text-xs font-bold text-center mt-2 text-blue-800">
-              Sport
-            </h1>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image
-              src="/category/laugh.png"
-              width={50}
-              height={30}
-              alt="Sports category"
-            />
-            <h1 className="text-xs font-bold text-center mt-2 text-blue-800">
-              Funny
-            </h1>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image
-              src="/category/image.png"
-              width={50}
-              height={30}
-              alt="Sports category"
-            />
-            <h1 className="text-xs font-bold text-center mt-2 text-blue-800">
-              Music
-            </h1>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image
-              src="/category/video.png"
-              width={50}
-              height={30}
-              alt="Sports category"
-            />
-            <h1 className="text-xs font-bold text-center mt-2 text-blue-800">
-              Movie
-            </h1>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image
-              src="/category/tv.png"
-              width={50}
-              height={30}
-              alt="Sports category"
-            />
-            <h1 className="text-xs font-bold text-center mt-2 text-blue-800">
-              Television
-            </h1>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image
-              src="/category/robot.png"
-              width={50}
-              height={30}
-              alt="Sports category"
-            />
-            <h1 className="text-xs font-bold text-center mt-2 text-blue-800">
-              Vigtage
-            </h1>
-          </div>
-        </div>
+        {selected === "category" && <Category />}
+        {selected === "products" && <Popular />}
       </div>
     </>
   );
